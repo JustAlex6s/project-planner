@@ -1,0 +1,27 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Planner</title>
+  </head>
+  <body>
+    <h2>Project Planner</h2>
+
+    <div id="formulaire-tache">
+        <label for="nomTache">Nom de la tâche :</label>
+        <input type="text" id="nomTache" required minlength="3" maxlength="256">
+
+        <label for="descriptionTache">Description de la tâche :</label>
+        <textarea id="descriptionTache" minlength="5" maxlength="1024"></textarea>
+
+        <label for="dateEcheance">Date d'échéance :</label>
+        <input type="date" id="dateEcheance" required>
+
+        <button onclick="ajouterTache()">Ajouter la Tâche</button>
+    </div>
+
+    <div id="liste-taches">
+
+    <script src="script2.js"></script>
+  </body>
+</html>

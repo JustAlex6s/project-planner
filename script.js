@@ -5,7 +5,7 @@ function ajouterTache() {
 
     // Valider les données
     if (!nomTache || !dateEcheance) {
-        alert('Le nom de la tâche et la date d'échéance sont requis !');
+        alert("Le nom de la tâche et la date d'échéance sont requis !");
         return;
     }
 
@@ -45,7 +45,7 @@ function mettreAJourListeTaches() {
 taches.forEach(tache => {
         const elementTache = document.createElement('div');
         elementTache.innerHTML = 
-            <p>ID : ${tache.id}</p>
+        ` <p>ID : ${tache.id}</p>
             <p>Nom : ${tache.nom}</p>
             <p>Description : ${tache.description || 'N/A'}</p>
             <p>Statut : ${tache.statut}</p>
@@ -53,7 +53,7 @@ taches.forEach(tache => {
             <p>Date d'Échéance : ${tache.dateEcheance}</p>
             <button onclick="mettreAJourTache(${tache.id})">Mettre à Jour</button>
             <button onclick="supprimerTache(${tache.id})">Supprimer</button>
-        ;
+            ` ;
         listeTachesElement.appendChild(elementTache);
     });
 }

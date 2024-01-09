@@ -2,6 +2,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com%22%3E/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Arvo&display=swap" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
+
     <title>Project Planner</title>
   </head>
   <body>
@@ -19,6 +26,21 @@
 
         <button onclick="ajouterTache()">Ajouter la Tâche</button>
     </div>
+
+    <div id="filtre-statut">
+      <button onclick="filtrerTaches('à faire')">À faire</button>
+      <button onclick="filtrerTaches('en cours')">En cours</button>
+      <button onclick="filtrerTaches('terminé')">Terminé</button>
+      <button onclick="afficherToutesTaches()">Toutes les tâches</button>
+  </div>
+
+  <div>
+    <label for="triTaches">Trier par :</label>
+    <select id="triTaches" onchange="trierTaches()">
+        <option value="tempsRestant">Durée restante</option>
+        <option value="nom">Nom</option>
+    </select>
+</div>
 
     <div id="liste-taches">
 

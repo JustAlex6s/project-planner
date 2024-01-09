@@ -1,0 +1,57 @@
+h2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-family: "Arvo", serif;
+  font-size: 50px;
+}
+
+div#formulaire-tache {
+  justify-content: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 0px 70px 0px 70px;
+  justify-content: space-evenly;
+}
+
+#formulaire-tache {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: "Baloo 2", sans-serif;
+}
+
+div#liste-taches {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+div#liste-taches > div {
+  border: 1px solid black;
+  width: 300px;
+  border-radius: 20px;
+  padding: 10px 15px 10px 15px;
+  margin: 10px;
+  font-family: "Baloo 2", sans-serif;
+  font-weight: bold;
+}
+
+input#nomTache {
+  margin: 10px;
+}
+
+textarea#descriptionTache {
+  margin: 10px;
+  width: 280px;
+  height: 21px;
+}
+
+input#dateEcheance {
+  margin: 10px;
+}
+
+label {
+  font-weight: bold;
+}/*# sourceMappingURL=style.css.map */

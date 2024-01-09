@@ -144,4 +144,11 @@ div#liste-taches div button {
   height: 30px;
   font-weight: bold;
   margin: 5px;
+}
+
+select#triTaches {
+  width: 140px;
+  height: 25px;
+  font-family: "Arvo", serif;
+  border-radius: 5px;
 }/*# sourceMappingURL=style.css.map */

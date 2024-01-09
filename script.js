@@ -3,19 +3,18 @@ function ajouterTache() {
     const descriptionTache = document.getElementById('descriptionTache').value;
     const dateEcheance = document.getElementById('dateEcheance').value;
 
-    // Valider les données
+
     if (!nomTache) {
         alert("Le nom de la tâche est requis !");
         return;
     }
 
-    // Valider la longueur du nom de la tâche
     if (nomTache.length < 3 || nomTache.length > 256) { 
         alert("Le nom de la tâche doit contenir entre 3 et 256 caractères.");
         return;
     }
 
-    // Valider la longueur de la description de la tâche
+
     if (descriptionTache.length < 5 || descriptionTache.length > 1024) {
         alert("La description de la tâche doit contenir entre 5 et 1024 caractères.");
         return;
@@ -64,7 +63,7 @@ function calculerTempsRestant(dateCreation, dateEcheance) {
     const dateCreationObj = new Date(dateCreation);
     const dateEcheanceObj = new Date(dateEcheance);
 
-    // Calculer la différence en millisecondes entre la date d'échéance et la date de création
+   
     const differenceEnMillisecondes = dateEcheanceObj - dateCreationObj;
 
     // Convertir la différence en jours
@@ -88,7 +87,7 @@ const joursRestantsText = tempsRestant >= 0 ? `${tempsRestant} jour(s) restant(s
 
 elementTache.innerHTML =
     ` 
-    <p id="tacheNom">Nom : ${tache.nom}</p>
+    <p id="tacheNom">${tache.nom}</p>
     <p>Description : ${tache.description || 'N/A'}</p>
     <p>Statut : ${tache.statut}</p>
     <p>Date de Création : ${tache.dateCreation}</p>

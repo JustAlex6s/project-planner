@@ -4,12 +4,13 @@ function ajouterTache() {
     const dateEcheance = document.getElementById('dateEcheance').value;
 
     // Valider les données
-    if (!nomTache || !dateEcheance) {
-        alert("Le nom de la tâche et la date d'échéance sont requis !");
+    if (!nomTache) {
+        alert("Le nom de la tâche est requis !");
         return;
     }
-     // Valider la longueur du nom de la tâche
-     if (nomTache.length < 3 || nomTache.length > 256) {
+
+    // Valider la longueur du nom de la tâche
+    if (nomTache.length < 3 || nomTache.length > 256) { 
         alert("Le nom de la tâche doit contenir entre 3 et 256 caractères.");
         return;
     }
@@ -25,7 +26,10 @@ function ajouterTache() {
 
     // Définir le statut par défaut et la date de création
     const statutTache = 'à faire';
-    const dateCreation = new Date().toLocaleString('en-US', { timeZone: 'Europe/Brussels', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false  });
+    const dateCreation = new Date().toLocaleString('en-US', { timeZone: 'Europe/Brussels', year: 'numeric', month: 'long', day: 'numeric',  hour12: false });
+
+    // Utiliser la date de création + 14 jours si aucune date d'échéance n'est saisie
+    const dateEcheanceParDefaut = dateEcheance ? dateEcheance : calculerDateEcheanceParDefaut(dateCreation);
 
     // Créer l'objet tâche
     const tache = {
@@ -34,7 +38,7 @@ function ajouterTache() {
         description: descriptionTache,
         statut: statutTache,
         dateCreation: dateCreation,
-        dateEcheance: dateEcheance
+        dateEcheance: dateEcheanceParDefaut
     };
 
     // Ajouter la tâche à la liste
@@ -48,43 +52,54 @@ function ajouterTache() {
     document.getElementById('descriptionTache').value = '';
     document.getElementById('dateEcheance').value = '';
 }
+    
+function calculerDateEcheanceParDefaut() {
+    const dateCreationObj = new Date();
+    const dateEcheanceParDefaut = new Date(dateCreationObj.getTime() + (14 * 24 * 60 * 60 * 1000));
+    return dateEcheanceParDefaut.toLocaleDateString('en-US', { timeZone: 'Europe/Brussels', year: 'numeric', month: 'long', day: 'numeric', hour12: false });
+}
+
 
 function calculerTempsRestant(dateCreation, dateEcheance) {
     const dateCreationObj = new Date(dateCreation);
     const dateEcheanceObj = new Date(dateEcheance);
-    
-    const differenceEnMillisecondes = dateCreationObj - dateEcheanceObj ;
-    const differenceEnJours = Math.floor(differenceEnMillisecondes / (1000 * 60 * 60 * 24));
+
+    // Calculer la différence en millisecondes entre la date d'échéance et la date de création
+    const differenceEnMillisecondes = dateEcheanceObj - dateCreationObj;
+
+    // Convertir la différence en jours
+    const differenceEnJours = Math.ceil(differenceEnMillisecondes / (1000 * 60 * 60 * 24));
 
     return differenceEnJours;
 }
 
-// Fonction pour mettre à jour la liste des tâches en fonction du statut
 function mettreAJourListeTaches(statutFiltre) {
-    const listeTachesElement = document.getElementById('liste-taches');
-    listeTachesElement.innerHTML = '';
+const listeTachesElement = document.getElementById('liste-taches');
+listeTachesElement.innerHTML = '';
 
-    const tachesAffichees = statutFiltre
-        ? taches.filter(tache => tache.statut === statutFiltre)
-        : taches;
+const tachesAffichees = statutFiltre
+? taches.filter(tache => tache.statut === statutFiltre)
+: taches;
 
-    tachesAffichees.forEach(tache => {
-        const elementTache = document.createElement('div');
-        const tempsRestant = calculerTempsRestant(tache.dateCreation, tache.dateEcheance);
-        elementTache.innerHTML = 
-        ` 
-            <p>Nom : ${tache.nom}</p>
-            <p>Description : ${tache.description || 'N/A'}</p>
-            <p>Statut : ${tache.statut}</p>
-            <p>Date de Création : ${tache.dateCreation}</p>
-            <p>Date d'Échéance : ${tache.dateEcheance}</p>
-            <p>Temps restant: ${tempsRestant} jour(s)</p>
-            <button onclick="mettreAJourTache(${tache.id})">Mettre à Jour</button>
-            <button onclick="supprimerTache(${tache.id})">Supprimer</button>
-        ` ;
+tachesAffichees.forEach(tache => {
+const elementTache = document.createElement('div');
+const tempsRestant = calculerTempsRestant(new Date().toLocaleString('en-US', { timeZone: 'Europe/Brussels' }), tache.dateEcheance);
+const joursRestantsText = tempsRestant >= 0 ? `${tempsRestant} jour(s) restant(s)` : 'Date échue';
 
-        listeTachesElement.appendChild(elementTache);
-    });
+elementTache.innerHTML =
+    ` 
+    <p id="tacheNom">Nom : ${tache.nom}</p>
+    <p>Description : ${tache.description || 'N/A'}</p>
+    <p>Statut : ${tache.statut}</p>
+    <p>Date de Création : ${tache.dateCreation}</p>
+    <p>Date d'Échéance : ${tache.dateEcheance}</p>
+    <p>Temps restant: ${joursRestantsText}</p>
+    <button onclick="mettreAJourTache(${tache.id})">Mettre à Jour</button>
+    <button onclick="supprimerTache(${tache.id})">Supprimer</button>
+`;
+
+listeTachesElement.appendChild(elementTache);
+});
 }
 
 // Fonction pour filtrer les tâches par statut

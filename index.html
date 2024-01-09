@@ -24,17 +24,17 @@
         <label for="dateEcheance">Date d'échéance :</label>
         <input type="date" id="dateEcheance" required>
 
-        <button onclick="ajouterTache()">Ajouter la Tâche</button>
+        <button id ="ajouter" onclick="ajouterTache()">Ajouter la Tâche</button>
     </div>
 
     <div id="filtre-statut">
-      <button onclick="filtrerTaches('à faire')">À faire</button>
-      <button onclick="filtrerTaches('en cours')">En cours</button>
-      <button onclick="filtrerTaches('terminé')">Terminé</button>
-      <button onclick="afficherToutesTaches()">Toutes les tâches</button>
+      <button onclick="filtrerTaches('à faire')" class="active" >À faire</button>
+      <button onclick="filtrerTaches('en cours')"class="active">En cours</button>
+      <button onclick="filtrerTaches('terminé')"class="active">Terminé</button>
+      <button onclick="afficherToutesTaches()"class="active">Toutes les tâches</button>
   </div>
 
-  <div>
+  <div id="container">
     <label for="triTaches">Trier par :</label>
     <select id="triTaches" onchange="trierTaches()">
         <option value="tempsRestant">Durée restante</option>

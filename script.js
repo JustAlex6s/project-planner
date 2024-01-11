@@ -82,9 +82,13 @@ let ul3 = document.getElementById('ul3');
 ul3.innerHTML = "";
 //listeTachesElement.innerHTML = '';
 
-const tachesAffichees = statutFiltre
-? taches.filter(tache => tache.statut === statutFiltre)
-: taches;
+let tachesAffichees;
+
+if (statutFiltre) {
+  tachesAffichees = taches.filter(tache => tache.statut === statutFiltre);
+} else {
+  tachesAffichees = taches;
+}
 
 tachesAffichees.forEach(tache => {
 const elementTache = document.createElement('div');

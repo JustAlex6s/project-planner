@@ -73,8 +73,14 @@ function calculerTempsRestant(dateCreation, dateEcheance) {
 }
 
 function mettreAJourListeTaches(statutFiltre) {
-const listeTachesElement = document.getElementById('liste-taches');
-listeTachesElement.innerHTML = '';
+let listeTachesElement = 0 ;
+let ul1 = document.getElementById('ul1');
+ul1.innerHTML = "";
+let ul2 = document.getElementById('ul2');
+ul2.innerHTML = "";
+let ul3 = document.getElementById('ul3');
+ul3.innerHTML = "";
+//listeTachesElement.innerHTML = '';
 
 const tachesAffichees = statutFiltre
 ? taches.filter(tache => tache.statut === statutFiltre)
@@ -84,7 +90,15 @@ tachesAffichees.forEach(tache => {
 const elementTache = document.createElement('div');
 const tempsRestant = calculerTempsRestant(new Date().toLocaleString('en-US', { timeZone: 'Europe/Brussels' }), tache.dateEcheance);
 const joursRestantsText = tempsRestant >= 0 ? `${tempsRestant} jour(s) restant(s)` : 'Date échue';
-
+if(tache.statut === "à faire"){
+    listeTachesElement = ul1;
+}
+else if (tache.statut === "en cours"){
+    listeTachesElement = ul2;
+}
+else if (tache.statut === "terminé"){
+    listeTachesElement = ul3;
+}
 elementTache.innerHTML =
     ` 
     <p id="tacheNom">${tache.nom}</p>
